@@ -7,14 +7,13 @@ on:
     
   workflow_dispatch:
    
-jobs:
-
-
-Jira_Approvals:
-
- - name: Run a one-line script
-        run: echo Hello, world!
-        run: echo {{issue.description}}
+jobs:   
+    Jira_Approvals:
+      runs-on: ubuntu-latest
+    
+        - name:Run a one-line script
+                run:echo Hello, world!
+                run:echo {{issue.description}}
 
   #1. fetch the approver name from jira
   #2. print "approver_name has approved this Pull request at time of approval"
@@ -22,7 +21,7 @@ Jira_Approvals:
   # This workflow contains a single job called "build"
   #build:
     # The type of runner that the job will run on
-   # runs-on: ubuntu-latest
+   #
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     #steps:
