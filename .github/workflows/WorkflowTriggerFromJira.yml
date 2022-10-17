@@ -6,9 +6,8 @@ name: WorkflowTriggerFromJira
 on:
   # Triggers the workflow on repository_dispatch
   
- pull_request:
- #repository_dispatch:
-    #event_type:[approval]
+ repository_dispatch:
+    event_type:[approval]
 
   # Allows you to run this workflow manually from the Actions tab
  workflow_dispatch:
