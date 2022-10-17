@@ -2,7 +2,8 @@ name: WorkflowTriggerFromJira
 on:
   # Triggers the workflow on repository_dispatch
   repository_dispatch:
-    event_type:[Jira_Approvals]
+    types: [ "event-triggered-by-jira" ]
+
 jobs: 
   Jira_Approvals:
     runs-on: ubuntu-latest
