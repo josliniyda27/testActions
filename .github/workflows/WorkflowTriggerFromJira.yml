@@ -1,0 +1,18 @@
+name: WorkflowTriggerFromJira
+on:
+  # Triggers the workflow on repository_dispatch
+  repository_dispatch:
+    types: ["Jira_Approvals"]
+jobs: 
+  Jira_Approvals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Print JIRA Pyload
+        run: |
+          echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+          echo Approver Nameis ${{github.event.client_payload.ApproverName}}
+          echo Approved at ${{github.event.client_payload.Time}}
+        
+
+     
