@@ -12,9 +12,7 @@ jobs:
       - name: Print JIRA Pyload
         run: |
           echo Hello World!
-          #echo Approved at ${{{{webhookResponse.body}}
-          #echo JIRA number is ${{ github.event.client_payload.jira-issue }}
-          #echo Approver Nameis ${{github.event.client_payload.ApproverName}}
+         
           
         
 
