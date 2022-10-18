@@ -11,9 +11,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Print JIRA Pyload
         run: |
-          echo "The job was automatically triggered by a ${{ github.event_name }} event."
-          echo "From Jira Issue Key ${{github.event.client_payload.jirra_issue}}."
-          echo "From Jira Issue Created at ${{github.event.client_payload.Summary}}."
+          echo "The job was automatically triggered by a ${{ github.event_name }} event"
+          echo "Issue Key ${{github.event.client_payload.jirra_issue}}"
+          echo "Issue Summary:  ${{github.event.client_payload.Summary}}"
+          echo "Issue Description: ${{github.event.client_payload.Description}}"
          
           
         
