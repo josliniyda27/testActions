@@ -11,9 +11,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Print JIRA Pyload
         run: |
-          echo JIRA number is ${{ github.event.client_payload.jira-issue }}
-          echo Approver Nameis ${{github.event.client_payload.ApproverName}}
-          echo Approved at ${{github.event.client_payload.Time}}
+          #echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+          #echo Approver Nameis ${{github.event.client_payload.ApproverName}}
+          echo Approved at ${{{{webhookResponse.body}}
         
 
      
