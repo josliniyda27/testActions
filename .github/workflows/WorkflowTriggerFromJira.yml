@@ -12,9 +12,9 @@ jobs:
       - name: Print JIRA Pyload
         run: |
           echo "The job was automatically triggered by a ${{ github.event_name }} event"
-          echo "Issue Key ${{github.event.client_payload.jirra_issue}}"
-          echo "Issue Summary:  ${{github.event.client_payload.Summary}}"
-          echo "Issue Description: ${{github.event.client_payload.Description}}"
+          echo "Issue Key : ${{github.event.client_payload.jirra_issue}}"
+          echo "Issue Summary :  ${{github.event.client_payload.Summary}}"
+          echo "Reviewed by : ${{github.event.client_payload.Reviewers}}"
          
           
         
