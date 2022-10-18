@@ -13,7 +13,7 @@ jobs:
         run: |
           echo "The job was automatically triggered by a ${{ github.event_name }} event."
           echo "From Jira Issue Key ${{github.event.client_payload.jirra_issue}}."
-          echo "From Jira Issue Created at ${{github.event.client_payload.Time}}."
+          echo "From Jira Issue Created at ${{github.event.client_payload.Summary}}."
          
           
         
