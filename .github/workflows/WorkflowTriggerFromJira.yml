@@ -12,7 +12,8 @@ jobs:
       - name: Print JIRA Pyload
         run: |
           echo "The job was automatically triggered by a ${{ github.event_name }} event."
-          echo "From Jira ${{github.event.client_payload.jirra_issue}}"
+          echo "From Jira Issue Key ${{github.event.client_payload.jirra_issue}}."
+          echo "From Jira Issue Created at ${{github.event.client_payload.Time}}."
          
           
         
