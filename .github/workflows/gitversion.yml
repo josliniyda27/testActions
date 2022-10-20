@@ -10,5 +10,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Fetch all history for all tags and branches
       run: |
+          githubjson=`cat $package.json`
           echo "PACKAGE_JSON=$(jq -c . < package.json)" >> $GITHUB_ENV
           echo '${{ fromJson(env.PACKAGE_JSON).version }}'
