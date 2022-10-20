@@ -10,7 +10,7 @@ jobs:
     - id: set-matrix
       run: |
         JSON=$(cat ./package.json)
-        echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+        echo "::set-output name=matrix::${JSON//'%'/'%25'}."
 
   job2:
     needs: job1
