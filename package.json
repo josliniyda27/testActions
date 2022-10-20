@@ -22,5 +22,6 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13"
-  }
+  },
+      "postpublish" : "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags"
 }
