@@ -1,19 +1,22 @@
-on:
-   workflow_dispatch:
-   
+name: build
+on: push
+  
 jobs:
-  gitversion:
-    name: gitversion
+  job1:
     runs-on: ubuntu-latest
-    steps: 
-     - uses: actions/checkout@v3
-     - id : set_var    
-        run:|
-         content='cat ./package.json'
-         content="${content//'%'/'%25'}"
-         content="${content//$'\n'/'%0A'}"
-         content="${content//$'\r'/'%0D'}"
-         echo "::set-output name=packageJson::$content"
-     - run: echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
-       
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix
+      run: |
+        JSON=$(cat ./package.json)
+        echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{res.json(fromJson(needs.job1.outputs.matrix))}}
+    steps:
+    - run: build
     
