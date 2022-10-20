@@ -5,17 +5,14 @@ jobs:
   gitversion:
     name: gitversion
     runs-on: ubuntu-latest
-    steps:
-     - id: set_var
+    steps:    
+     - id : set_var    
         run:|
          content='cat ./package.json'
-         #the following lines are only required for multi line json
          content="${content//'%'/'%25'}"
          content="${content//$'\n'/'%0A'}"
          content="${content//$'\r'/'%0D'}"
-         # end of optional handling for multi line json
          echo "::set-output name=packageJson::$content"
-      - run: |
-          echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
+         echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
       
     
