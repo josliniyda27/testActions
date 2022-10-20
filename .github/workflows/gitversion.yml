@@ -8,8 +8,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
     - name: Fetch all history for all tags and branches
-      - run: echo "PACKAGE_JSON=$(jq -c . < package.json)" >> $GITHUB_ENV
-      - run: echo '${{ fromJson(env.PACKAGE_JSON).version }}'
-   
+      run: |
+          echo "PACKAGE_JSON=$(jq -c . < package.json)" >> $GITHUB_ENV
+          echo '${{ fromJson(env.PACKAGE_JSON).version }}'
