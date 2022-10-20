@@ -1,3 +1,7 @@
+"scripts": {
+     ...
+     "trypublish": "npm publish || true"
+},
 {
   "name": "gateway",
   "version": "1.0.0",
