@@ -8,8 +8,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Fetch all history for all tags and branches
-      run: |
-          githubjson=`cat $package.json`
-          echo "PACKAGE_JSON=$(jq -c . < package.json)" >> $GITHUB_ENV
-          echo '${{ fromJson(env.PACKAGE_JSON).version }}'
+    - name: Fetch all Json Value 
+ 
+    - run: |
+        echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
+        cat ./package.json >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+    - run: |
+        echo '${{ fromJson(env.PACKAGE_JSON).version }}'
