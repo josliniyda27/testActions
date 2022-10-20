@@ -6,14 +6,16 @@ jobs:
     name: gitversion
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: JSON to variables
-      uses: antifree/json-to-variables@v1.0.1
-      with:
-         filename: 'package.json'
-         prefix: test
-    - name: Show output
-         run:echo "The Name was ${{ name }}, ${{ version }}"
+     - id: set_var
+        run:|
+         content='cat ./package.json'
+         #the following lines are only required for multi line json
+         content="${content//'%'/'%25'}"
+         content="${content//$'\n'/'%0A'}"
+         content="${content//$'\r'/'%0D'}"
+         # end of optional handling for multi line json
+         echo "::set-output name=packageJson::$content"
+      - run: |
+          echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
       
     
