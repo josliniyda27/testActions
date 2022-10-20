@@ -1,7 +1,9 @@
 "scripts": {
-     ...
-     "trypublish": "npm publish || true"
-},
+      "setup-test": "cd test && npm run setup",
+      "test": "cd test && npm run test",
+      "lint": "eslint index.js cli.js",
+      "trypublish": "npm publish || true"
+  },
 {
   "name": "gateway",
   "version": "1.0.0",
