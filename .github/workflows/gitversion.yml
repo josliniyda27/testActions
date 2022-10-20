@@ -9,7 +9,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        JSON=$(cat ./package.json)
+        JSON=$(cat ./https://github.com/josliniyda27/testActions/blob/main/package.json)
         echo "::set-output name=matrix::${JSON//'%'/'%25'}"
 
   job2:
