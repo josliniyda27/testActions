@@ -1,0 +1,10 @@
+name: Version
+on: 
+  pull_request:
+jobs:
+  script:
+    runs-on: ubuntu-latest
+      export VERSION=$(node -p "require('./package.json').version")
+      - run echo Version=$VERSION
+         
+      
