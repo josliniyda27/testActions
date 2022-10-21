@@ -2,9 +2,10 @@ name: Version
 on: 
   pull_request:
 jobs:
-  script:
+   build:   
     runs-on: ubuntu-latest
-      export VERSION=$(node -p "require('./package.json').version")
-      - run echo Version=$VERSION
-         
-      
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo Hello, world!
+      - run: export VERSION=$(node -p "require('./package.json').version")
+      - run: echo Version=$VERSION
