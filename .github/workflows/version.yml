@@ -7,5 +7,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo Hello, world! Hey
-      - run: export VERSION=$(node -p "require('./package.json').version")
-      - run: echo Version is $VERSION
+      - run: chmod +x script.sh
+      - run: ./script.sh $PACKAGE_VERSION
