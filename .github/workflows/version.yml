@@ -8,4 +8,4 @@ jobs:
       - uses: actions/checkout@v3
       - run: echo Hello, world! Hey
       - run: chmod +x script.sh
-      - run: ./script.sh $PACKAGE_VERSION
+      - run: ./script.sh 
