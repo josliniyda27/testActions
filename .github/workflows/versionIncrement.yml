@@ -15,7 +15,7 @@ jobs:
       - run: npm version minor -m "v%s"
       - run: VERSION=$(node -p "require('./package.json').version")
       - run: git tag ${VERSION}
-      - run: git credential-manager uninstall
+      - run: git config --global alias.credential-manager "credential-manager-core"
       - run: git credential-manager install
       - run: git push "https://$GITHUB_ACTOR:${{ secrets.NPM_AUTH_TOKEN }}@github.com/$testActions.git" --follow-tags
       - run: git push "https://$GITHUB_ACTOR:${{ secrets.NPM_AUTH_TOKEN }}@github.com/$testActions.git" --tags
