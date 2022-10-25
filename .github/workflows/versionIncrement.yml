@@ -16,5 +16,5 @@ jobs:
       - run: VERSION=$(node -p "require('./package.json').version")
       - run: git tag ${VERSION}
       - run: git remote -v
-      - run: git push "https://$GITHUB_ACTOR:${{ secrets.NPM_AUTH_TOKEN }}@github.com/josliniyda27/$testActions.git" --follow-tags
-      - run: git push "https://$GITHUB_ACTOR:${{ secrets.NPM_AUTH_TOKEN }}@github.com/josliniyda27/$testActions.git" --tags
+      - run: git push --follow-tags
+      - run: git push --tags
