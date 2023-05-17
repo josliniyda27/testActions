@@ -23,6 +23,7 @@ jobs:
           fi
 
   continuous_integration:
+    needs: check_pull_request_body
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
