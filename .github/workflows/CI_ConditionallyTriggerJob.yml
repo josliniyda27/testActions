@@ -10,7 +10,8 @@ on:
 jobs:
   check_pull_request_body:
   
-    if: ${{ contains(github.event.pull_request.body , 'PostgresRDS') }}
+    if: ${{ contains(github.event.pull_request.body , '[x] PostgresRDS') }}
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,7 +23,7 @@ jobs:
           
   continuous_integration:
   
-      if: ${{ contains(github.event.pull_request.body , 'CI') }}
+      if: ${{ contains(github.event.pull_request.body , '[x] CI') }}
       runs-on: ubuntu-latest
       steps:
         - name: Checkout repository
