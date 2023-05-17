@@ -1,1 +1,33 @@
+name: PostgreSQL RDS Workflow
+
+on:
+  push:
+    branches:
+      - feature/CICD
+      - main
+
+jobs:
+  check_pull_request_body:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up PostgreSQL
+        uses: docker/setup-postgres@v1
+        with:
+          postgres-version: '13'
+
+      - name: Run on specific pull request body
+        run: |
+          if [[ "${{ github.event.pull_request.body }}" == *"Run RDS"* ]]; then
+            echo "Running PSQL commands..."
+            # Add your PSQL command steps here
+          fi
+
+          if [[ "${{ github.event.pull_request.body }}" == *"CI"* ]]; then
+            echo "Running CI workflow..."
+            # Run the CI workflow file (e.g., using the `workflow_run` event)
+          fi
 
