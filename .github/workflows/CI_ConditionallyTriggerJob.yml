@@ -9,6 +9,7 @@ on:
       - main 
 jobs:
   check_pull_request_body:
+  
     if: ${{ contains(github.event.pull_request.body , 'PostgresRDS') }}
     runs-on: ubuntu-latest
     steps:
@@ -20,6 +21,7 @@ jobs:
           echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS Workflow..."
           
   continuous_integration:
+  
       if: ${{ contains(github.event.pull_request.body , 'CI') }}
       runs-on: ubuntu-latest
       steps:
