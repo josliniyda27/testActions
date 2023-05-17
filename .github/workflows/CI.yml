@@ -2,9 +2,12 @@ name: PostgreSQL RDS Workflow
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
+     branches: 
+      - development
+      - uat
+      - release
+      - main
+      
 
 jobs:
   check_pull_request_body:
