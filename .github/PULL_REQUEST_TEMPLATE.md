@@ -1,6 +1,6 @@
 ## Description
 
-RUN RDS_ONLY | CI :  
+PostgresRDS
 
 ## Changes
 
