@@ -21,7 +21,6 @@ jobs:
           if [[ "${{ github.event.pull_request.body }}" == *"PostgresRDS"* ]]; then
             echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS job..."
             # Add your PostgreSQL-related steps here
-            # One after another
           else
             echo "Pull request body does not match 'PostgresRDS'. Skipping the job."
           fi
@@ -38,7 +37,6 @@ jobs:
           if [[ "${{ github.event.pull_request.body }}" == *"CI"* ]]; then
               echo "Performing CI Workflow"
               # Add your CI-related steps here
-              # One after another
           else
               echo "Pull request body does not match 'CI'. Skipping the job...."
           fi
