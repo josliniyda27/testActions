@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+     # Adding a comment for triggering PostgresRDS
       - name: Run on Postgres RDS
         run: |
           echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS Workflow..."
