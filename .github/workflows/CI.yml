@@ -2,9 +2,12 @@ name: PostgreSQL RDS Workflow
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
+     branches: 
+      - development
+      - uat
+      - release
+      - main
+      
 
 jobs:
   check_pull_request_body:
@@ -16,7 +19,7 @@ jobs:
       - name: Run on specific pull request body
         run: |
           if [[ "${{ github.event.pull_request.body }}" == *"PostgresRDS"* ]]; then
-            echo "Pull request body matches 'PostgresRDS'. Performing the job."
+            echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS job."
             # Add your PostgreSQL-related steps here
           else
             echo "Pull request body does not match 'PostgresRDS'. Skipping the job."
@@ -31,5 +34,9 @@ jobs:
 
       - name: Perform CI Workflow
         run: |
-          echo "Performing CI Workflow"
-          # Add your CI-related steps here
+          if [[ "${{ github.event.pull_request.body }}" == *"CI"* ]]; then
+              echo "Performing CI Workflow"
+              # Add your CI-related steps here
+          else
+              echo "Pull request body does not match 'CI'. Skipping the job."
+          fi
