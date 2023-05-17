@@ -8,33 +8,27 @@ on:
 
 jobs:
   check_pull_request_body:
-  if: ${{ github.event.pull_request.body == 'PostgresRDS' }}
-  runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Set up PostgreSQL
-        uses: docker/setup-postgres@v1
-        with:
-          postgres-version: '13'
 
       - name: Run on specific pull request body
         run: |
-          echo "Pull request body matches the PostgresRDS. Performing the job."
-    
-    Continuous Integration:
-    runs-on: ubuntu-latest
+          if [[ "${{ github.event.pull_request.body }}" == *"PostgresRDS"* ]]; then
+            echo "Pull request body matches 'PostgresRDS'. Performing the job."
+            # Add your PostgreSQL-related steps here
+          else
+            echo "Pull request body does not match 'PostgresRDS'. Skipping the job."
+          fi
 
+  continuous_integration:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       - name: Perform CI Workflow
         run: |
           echo "Performing CI Workflow"
-
-    
-          
-
+          # Add your CI-related steps here
