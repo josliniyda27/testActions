@@ -1,14 +1,15 @@
 name: PostgreSQL RDS Workflow
 
 on:
-  push:
-    branches:
-      - feature/CICD
-      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
 jobs:
   check_pull_request_body:
-    runs-on: ubuntu-latest
+  if: ${{ github.event.pull_request.body == 'PostgresRDS' }}
+  runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -21,13 +22,6 @@ jobs:
 
       - name: Run on specific pull request body
         run: |
-          if [[ "${{ github.event.pull_request.body }}" == *"Run RDS"* ]]; then
-            echo "Running PSQL commands..."
-            # Add your PSQL command steps here
-          fi
-
-          if [[ "${{ github.event.pull_request.body }}" == *"CI"* ]]; then
-            echo "Running CI workflow..."
-            # Run the CI workflow file (e.g., using the `workflow_run` event)
-          fi
+          echo "Pull request body matches the PostgresRDS. Performing the job."
+          
 
