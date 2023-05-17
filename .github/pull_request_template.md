@@ -1,11 +1,4 @@
-## Description
+## Please select the workflow to be triggered:
 
-PostgresRDS
-
-## Changes
-
-- [List the changes made in this pull request]
-
-## Related Issues
-
-[Reference any related issues or discussions]
+ - [ ] PostgresRDS
+ - [ ] CI
