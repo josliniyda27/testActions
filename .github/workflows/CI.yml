@@ -23,5 +23,18 @@ jobs:
       - name: Run on specific pull request body
         run: |
           echo "Pull request body matches the PostgresRDS. Performing the job."
+    
+    Continuous Integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Perform CI Workflow
+        run: |
+          echo "Performing CI Workflow"
+
+    
           
 
