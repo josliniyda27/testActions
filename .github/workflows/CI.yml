@@ -1,0 +1,34 @@
+name: PostgreSQL RDS Workflow
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check_pull_request_body:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run on specific pull request body
+        run: |
+          if [[ "${{ github.event.pull_request.body }}" == *"PostgresRDS"* ]]; then
+            echo "Pull request body matches 'PostgresRDS'. Performing the job."
+            # Add your PostgreSQL-related steps here
+          else
+            echo "Pull request body does not match 'PostgresRDS'. Skipping the job."
+          fi
+
+  continuous_integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Perform CI Workflow
+        run: |
+          echo "Performing CI Workflow"
+          # Add your CI-related steps here
