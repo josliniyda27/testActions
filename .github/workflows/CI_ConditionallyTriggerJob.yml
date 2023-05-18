@@ -26,6 +26,7 @@ jobs:
       - name: Run on Postgres RDS
         run: |
           echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS Workflow..."
+          echo "PGPASSWORD=<password> psql -h <hostname> -p <port> -d <database> -U <username>"
           
       - name: Install psql
         run: sudo apt-get install postgresql-client
