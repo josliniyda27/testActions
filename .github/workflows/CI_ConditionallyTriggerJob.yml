@@ -1,5 +1,4 @@
-name: PostgreSQL RDS Workflow
-
+name: Continuous integration
 on:
   pull_request:
      branches: 
@@ -8,17 +7,17 @@ on:
       - release
       - main 
 jobs:
-  check_pull_request_body:
+  PostgresRDS_workflow:
   
     if: ${{ contains(github.event.pull_request.body , '[x] PostgresRDS') }}
     
     runs-on: ubuntu-latest
-    env:
-      DB_HOST: ${{ secrets.DB_HOST }}
-      DB_PORT: ${{ secrets.DB_PORT }}
-      DB_DATABASE: ${{ secrets.DB_DATABASE }}
-      DB_USERNAME: ${{ secrets.DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+#     env:
+#       DB_HOST: ${{ secrets.DB_HOST }}
+#       DB_PORT: ${{ secrets.DB_PORT }}
+#       DB_DATABASE: ${{ secrets.DB_DATABASE }}
+#       DB_USERNAME: ${{ secrets.DB_USERNAME }}
+#       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,17 +27,17 @@ jobs:
           echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS Workflow..."
           echo "PGPASSWORD=<password> psql -h <hostname> -p <port> -d <database> -U <username>"
           
-      - name: Install psql
-        run: sudo apt-get install postgresql-client
+#       - name: Install psql
+#         run: sudo apt-get install postgresql-client
 
-      - name: Apply SQL Files
-        run: |
-          for file in $(find . -type f -name '*.sql'); do
-            psql -h $DB_HOST -p $DB_PORT -d $DB_DATABASE -U $DB_USERNAME -W < $file
-          done
+#       - name: Apply SQL Files
+#         run: |
+#           for file in $(find . -type f -name '*.sql'); do
+#             psql -h $DB_HOST -p $DB_PORT -d $DB_DATABASE -U $DB_USERNAME -W < $file
+#           done
 
           
-  continuous_integration:
+  CI:
   
       if: ${{ contains(github.event.pull_request.body , '[x] CI') }}
       runs-on: ubuntu-latest
