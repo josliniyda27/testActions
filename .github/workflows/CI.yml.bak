@@ -11,6 +11,7 @@ on:
 
 jobs:
   check_pull_request_body:
+    if: ${{ github.base_ref == 'development' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,6 +25,13 @@ jobs:
           else
             echo "Pull request body does not match 'PostgresRDS'. Skipping the job."
           fi
+      - name: Check env from .sh file
+        run: |
+          chmod +x .github/workflows/my_commands.sh
+          export GH_HEADREF=${{ github.head_ref }}
+          export TOKEN=${{ secrets.MY_TOKEN }}
+          ./.github/workflows/my_commands.sh
+          
 
   continuous_integration:
     needs: check_pull_request_body
