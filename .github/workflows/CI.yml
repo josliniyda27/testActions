@@ -27,10 +27,10 @@ jobs:
           fi
       - name: Check env from .sh file
         run: |
-          chmod +x my_commands.sh
+          chmod +x .github/workflows/my_commands.sh
           export GH_HEADREF=${{ github.head_ref }}
           export TOKEN=${{ secrets.token }}
-          ./my_commands.sh
+          ./.github/workflows/my_commands.sh
           
 
   continuous_integration:
