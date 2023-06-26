@@ -9,8 +9,8 @@ on:
       - main 
 
 jobs:
-  PullRequest_data_based_job:
-    runs-on: [self-hosted, X64,TEST,Linux,DEV]
+  Extract_PR_data:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -25,18 +25,23 @@ jobs:
 
           pr_data=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://cldgit.hdfc.com/api/v3/repos/${{ github.repository }}/pulls/$pr_number") 
          
-
-          if echo "$pr_data" | jq -e '.body | contains("[x] PostgresRDS")' > /dev/null; then
-            echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS Workflow..."
-            # Add the steps for Postgres RDS workflow
-          else
-            echo "Pull request body doesnot matches '[x] PostgresRDS'"
-          fi
-
-          if echo "$pr_data" | jq -e '.body | contains("[x] CD")' > /dev/null; then
-            echo "Pull request body matches 'CD'. Performing CD Workflow..."
-            # Add the steps for CD workflow
-          else
-            echo "Pull request body doesnot matches '[x] CD'" 
-          fi
+  Postgres_Deployment:
+    needs: Extract_PR_data
+    runs-on: ubuntu-latest
+    if: contains(needs.Extract_PR_data.outputs.pr_data, "[x] Postgres")
+    steps:
+      - name: Deploy Postgres
+        # Add the steps to deploy Postgres
+        run: |
+          echo "Postgres deployment"
+        
+  Continuous_Deployment:
+    needs: Extract_PR_data
+    runs-on: ubuntu-latest
+    if: contains(needs.Extract_PR_data.outputs.pr_data, "[x] CD")
+    steps:
+      - name: Continuous Deployment
+        # Add the steps to deploy Postgres
+        run: |
+          echo "Continuous Deployment"
 
