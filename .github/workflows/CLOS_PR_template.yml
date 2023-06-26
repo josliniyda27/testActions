@@ -1,0 +1,42 @@
+name: Workflow based on Pull Request Contents
+
+on:
+  push:
+    branches:
+      - development
+      - uat
+      - release
+      - main 
+
+jobs:
+  PullRequest_data_based_job:
+    runs-on: [self-hosted, X64,TEST,Linux,DEV]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get pull request data
+        id: pr
+        run: |
+          pr_number=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://cldgit.hdfc.com/api/v3/repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" | jq -r '.[0].number')
+
+          echo "pr_number: $pr_number"
+
+          pr_data=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://cldgit.hdfc.com/api/v3/repos/${{ github.repository }}/pulls/$pr_number") 
+         
+
+          if echo "$pr_data" | jq -e '.body | contains("[x] PostgresRDS")' > /dev/null; then
+            echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS Workflow..."
+            # Add the steps for Postgres RDS workflow
+          else
+            echo "Pull request body doesnot matches '[x] PostgresRDS'"
+          fi
+
+          if echo "$pr_data" | jq -e '.body | contains("[x] CD")' > /dev/null; then
+            echo "Pull request body matches 'CD'. Performing CD Workflow..."
+            # Add the steps for CD workflow
+          else
+            echo "Pull request body doesnot matches '[x] CD'" 
+          fi
+
