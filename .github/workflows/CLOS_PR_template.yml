@@ -28,11 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
           pr_data: ${{needs.Extract_PR_data.outputs.pr_data}}
-    if: ${{ contains(${{ env.pr_data }}, '[x] PostgresRDS') }}
+#if: ${{ contains(${{ env.pr_data }}, '[x] PostgresRDS') }}
     steps:
       - name: Deploy Postgres
         # Add the steps to deploy Postgres
         run: |
+          echo "$pr_data
           echo "Postgres deployment"
         
   Continuous_Deployment:
@@ -40,10 +41,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
           pr_data: ${{needs.Extract_PR_data.outputs.pr_data}}
-    if: ${{ contains(${{ env.pr_data }}, '[x] CD') }}
+#if: ${{ contains(${{ env.pr_data }}, '[x] CD') }}
     steps:
       - name: Continuous Deployment
         # Add the steps to deploy Postgres
         run: |
+          echo "$pr_data
           echo "Continuous Deployment"
 
