@@ -28,7 +28,7 @@ jobs:
   Postgres_Deployment:
     needs: Extract_PR_data
     runs-on: ubuntu-latest
-    if: contains(needs.Extract_PR_data.outputs.pr_data, "[x] Postgres")
+    if: contains(needs.Extract_PR_data.outputs.pr_data, "[x] PostgresRDS")
     steps:
       - name: Deploy Postgres
         # Add the steps to deploy Postgres
