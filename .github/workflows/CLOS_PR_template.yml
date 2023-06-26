@@ -35,7 +35,7 @@ jobs:
       - name: Deploy Postgres
         # Add the steps to deploy Postgres
         run: |
-          echo "$pr_data
+          echo "$pr_data"
           echo "Postgres deployment"
         
   Continuous_Deployment:
@@ -48,6 +48,6 @@ jobs:
       - name: Continuous Deployment
         # Add the steps to deploy Postgres
         run: |
-          echo "$pr_data
+          echo "$pr_data"
           echo "Continuous Deployment"
 
