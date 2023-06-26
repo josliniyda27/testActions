@@ -15,14 +15,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Get pull request data
         id: pr
         run: |
           pr_number=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://cldgit.hdfc.com/api/v3/repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" | jq -r '.[0].number')
-
           echo "pr_number: $pr_number"
-
           pr_data=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://cldgit.hdfc.com/api/v3/repos/${{ github.repository }}/pulls/$pr_number") 
          
   Postgres_Deployment:
@@ -38,7 +35,7 @@ jobs:
   Continuous_Deployment:
     needs: Extract_PR_data
     runs-on: ubuntu-latest
-    if: contains(needs.Extract_PR_data.outputs.pr_data, "[x] CD")
+    if: ${{ contains(needs.Extract_PR_data.outputs.pr_data, '[x] CD') }}
     steps:
       - name: Continuous Deployment
         # Add the steps to deploy Postgres
