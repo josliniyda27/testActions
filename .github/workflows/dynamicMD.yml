@@ -1,0 +1,41 @@
+name: Continuous integration.
+
+on: 
+  pull_request:
+    branches:
+      - development  
+jobs:
+  test_dynamic_MD_file:
+    if: ${{ github.base_ref == 'development' }}
+    runs-on: ubuntu latest
+
+    steps:
+      - name: Checkout ${{ github.head_ref }} #1
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}         
+      #Check dynamic md file .sh file
+      - name: dynamic md file .sh file
+        id: md
+        run: |
+              echo "URL=${{ secrets.URL }}" >> $GITHUB_ENV
+              echo "BRANCH=${{ github.head_ref }}" >>  $GITHUB_ENV
+              echo "WEBSITE=${{ secrets.WEBSITE }}" >>  $GITHUB_ENV
+              LINK=$(cat ./.github/workflows/sample.md | sed "s|%URL%|${{ env.URL }}|g; s|%BRANCH%|${{ env.BRANCH }}|g; s|%WEBSITE%|${{ env.WEBSITE }}|g")
+              echo "LINK=$LINK" >> $GITHUB_ENV
+      # Create comment with github-script
+      - name: Create comment with validation result
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const LINK = process.env.LINK;
+            const output = `
+            ${LINK} \n
+             PR Number: ${{ github.event.pull_request.number }} \n Branch Name: ${{ github.head_ref }}`
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            }); 
