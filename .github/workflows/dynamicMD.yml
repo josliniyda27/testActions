@@ -11,15 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout ${{ github.head_ref }}
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
+      - name: Set NAME environment variable
+        run: echo "NAME=Joslin" >> $GITHUB_ENV
 
-      # Check dynamic md file 
-      - name: Dynamic MD file
-        id: md
+      - name: Substitute environment variables in Markdown file
         run: |
-          export "NAME=Joslin" 
-          echo "$(cat ./github/workflows/sample.md)|sed "s|[NAME]|${{ env.NAME }}|g"
-          echo "NAME=${{ env.NAME }}"
+          sed -e "s/\[NAME\]/${{ env.NAME }}/g" template.md > sample.md
+
+      # Use the updated sample.md file in subsequent steps
+      - name: Use the updated sample.md file
+        run: |
+          cat sample.md
