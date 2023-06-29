@@ -21,7 +21,7 @@ jobs:
               echo "URL=${{ secrets.URL }}" >> $GITHUB_ENV
               echo "BRANCH=${{ github.head_ref }}" >>  $GITHUB_ENV
               echo "WEBSITE=${{ secrets.WEBSITE }}" >>  $GITHUB_ENV
-              LINK=$(cat ./.github/workflows/sample.md | sed "s|%URL%|${{ env.URL }}|g; s|%BRANCH%|${{ env.BRANCH }}|g; s|%WEBSITE%|${{ env.WEBSITE }}|g")
+              LINK=$(cat ./.github/workflows/sample.md)
               echo "LINK=$LINK" >> $GITHUB_ENV
       # Create comment with github-script
       - name: Create comment with validation result
