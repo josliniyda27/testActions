@@ -17,5 +17,5 @@ jobs:
 
       - name: Substitute environment variables in Markdown file
         run: |
-          sed -i "s/[NAME]/${{ env.NAME }}/g" ./.github/workflows/sample.md 
-          echo "$(cat ./.github/workflows/sample.md)"
+          sed -i "s/[NAME]/${{ env.NAME }}/g" ./sample.md 
+          echo "$(cat ./sample.md)"
