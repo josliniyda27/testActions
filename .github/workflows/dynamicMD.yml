@@ -20,6 +20,6 @@ jobs:
       - name: Dynamic MD file
         id: md
         run: |
-          echo "NAME=Joslin" >> $GITHUB_ENV
+          export "NAME=Joslin" 
           echo "$(cat ./github/workflows/sample.md)|sed "s|[NAME]|${{ env.NAME }}|g"
           echo "NAME=${{ env.NAME }}"
