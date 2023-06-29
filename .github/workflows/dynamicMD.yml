@@ -12,13 +12,10 @@ jobs:
 
     steps:
       - name: Set NAME environment variable
+        id: set_name
         run: echo "NAME=Joslin" >> $GITHUB_ENV
 
       - name: Substitute environment variables in Markdown file
         run: |
-          sed -e "s/\[NAME\]/${{ env.NAME }}/g" ./github/workflows/sample.md > ./sampleNEW.md
-
-      # Use the updated sample.md file in subsequent steps
-      - name: Use the updated sample.md file
-        run: |
-          cat ./sampleNEW.md
+          sed -i "s/\[NAME\]/${{ env.NAME }}/g" ./github/workflows/sample.md
+          echo "$(cat ./github/workflows/sample.md)"
