@@ -1,8 +1,2 @@
-# Sample Markdown File
-
-This is a sample markdown file that demonstrates the usage of variables.
-
-- URL: [URL_PLACEHOLDER]
-- Branch: [BRANCH_PLACEHOLDER]
-- Website: [WEBSITE_PLACEHOLDER]
-
+[link]: https://www.bing.com/images/search?view=detailV2&ccid=66SKpNYs&id=534B010A8327389C6F03B6E5AC056D2F5BB85C6F&thid=OIP.66SKpNYs6RsBfRoDc-ArpgHaFj&mediaurl=https%3A%2F%2Fth.bing.com%2Fth%2Fid%2FR.eba48aa4d62ce91b017d1a0373e02ba6%3Frik%3Db1y4Wy9tBazltg%26riu%3Dhttp%253a%252f%252fpoolechessclub.org.uk%252fwp-content%252fuploads%252f2020%252f07%252fOnline-.jpg%26ehk%3DZCR2JWxAg4f7Z%252fGobR86DmSYY3l%252fHmWyR0W1ZG1d21s%253d%26risl%3D%26pid%3DImgRaw%26r%3D0&exph=750&expw=1000&q=online+images&simid=607988119180021151&form=IRPRST&ck=961F246729919C8B8226244D5D8F81F4&selectedindex=0&ajaxhist=0&ajaxserp=0&pivotparams=insightsToken%3Dccid_orzObLUy*cp_511798FE9F7DCA6F3258809AE9651479*mid_D735C23166CE2B3A8E51CB2C82C090C7BC1A5C0E*simid_607987552256409850*thid_OIP.orzObLUyFm2tEkWVHSzlawHaFj&vt=0&sim=11&iss=VSI&ajaxhist=0&ajaxserp=0
+[link]
