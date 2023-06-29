@@ -20,35 +20,6 @@ jobs:
       - name: Dynamic MD file
         id: md
         run: |
-          echo "URL=${{ secrets.URL }}" >> $GITHUB_ENV
-          echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
-          echo "WEBSITE=${{ secrets.WEBSITE }}" >> $GITHUB_ENV
-          LINK=$(cat ./.github/workflows/sample.md)
-          echo "LINK=$LINK" >> $GITHUB_ENV
-
-      # Create comment with github-script
-      - name: Create comment with validation result
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const LINK = process.env.LINK;
-            const output = `
-            # Sample Markdown File
-
-            This is a sample markdown file that demonstrates the usage of variables.\n
-            - URL: [${{ secrets.URL }}]
-            - Branch: [${{ github.head_ref }}]
-            - Website: [${{ secrets.WEBSITE }}]
-
-            ${LINK}
-
-            PR Number: ${{ github.event.pull_request.number }}
-            Branch Name: ${{ github.head_ref }}`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output.trim(),
-            });
+          echo "NAME=Joslin" >> $GITHUB_ENV
+          echo "$(cat ./github/workflows/sample.md)|sed "s|[NAME]|${{ env.NAME }}|g"
+          echo "${{ env.NAME }}"
