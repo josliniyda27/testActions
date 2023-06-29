@@ -1,0 +1,22 @@
+name: Continuous integration
+
+on:
+  pull_request:
+    branches:
+      - development
+
+jobs:
+  test_dynamic_MD_file:
+    if: ${{ github.base_ref == 'development' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set NAME environment variable
+        id: set_name
+        run: echo "NAME=Joslin" >> $GITHUB_ENV
+
+      - name: Substitute environment variables in Markdown file
+        run: |
+          pwd
+          ls
+          cat sample.md
