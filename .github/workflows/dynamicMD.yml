@@ -19,5 +19,4 @@ jobs:
         run: |
           pwd
           ls
-          sed -i "s/[NAME]/${{ env.NAME }}/g" ./sample.md 
-          echo "$(cat ./sample.md)"
+          cat sample.md
