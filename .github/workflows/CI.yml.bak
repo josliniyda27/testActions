@@ -1,0 +1,50 @@
+name: PostgreSQL RDS Workflow
+
+on:
+  pull_request:
+     branches: 
+      - development
+      - uat
+      - release
+      - main
+      
+
+jobs:
+  check_pull_request_body:
+    if: ${{ github.base_ref == 'development' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run on specific pull request body
+        run: |
+          if [[ "${{ github.event.pull_request.body }}" == *"PostgresRDS"* ]]; then
+            echo "Pull request body matches 'PostgresRDS'. Performing Postgres RDS job..."
+            # Add your PostgreSQL-related steps here
+          else
+            echo "Pull request body does not match 'PostgresRDS'. Skipping the job."
+          fi
+      - name: Check env from .sh file
+        run: |
+          chmod +x .github/workflows/my_commands.sh
+          export GH_HEADREF=${{ github.head_ref }}
+          export TOKEN=${{ secrets.MY_TOKEN }}
+          ./.github/workflows/my_commands.sh
+          
+
+  continuous_integration:
+    needs: check_pull_request_body
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Perform CI Workflow
+        run: |
+          if [[ "${{ github.event.pull_request.body }}" == *"CI"* ]]; then
+              echo "Performing CI Workflow"
+              # Add your CI-related steps here
+          else
+              echo "Pull request body does not match 'CI'. Skipping the job...."
+          fi
